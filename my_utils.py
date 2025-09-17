@@ -41,7 +41,8 @@ def get_column(file_name, query_column, query_value, result_column=1):
         line_array = line.rstrip().split(',')                # splits line into an array
         
         if line_array[query_index] == query_value:           # checks for query_value in the query_column
-            result_array.append(line_array[result_index])    # appends value if conditions are met to an array
+            value=float(line_array[result_index])            # Saves value as a float
+            result_array.append(int(value))                  # appends value as an integer to an array (since the instructions wanted integers)
     
     f.close()
 
