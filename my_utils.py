@@ -46,7 +46,8 @@ def get_column(file_name, query_column, query_value, result_column=1):
         
         if line_array[query_index] == query_value:            # checks for query_value in the query_column
             try:
-                result_array.append(line_array[result_index]) # appends value if conditions are met to an array
+                value=float(line_array[result_index])         # Saves value as a float
+                result_array.append(int(value))               # appends value as an integer to an array (since the instructions wanted integers)
             except IndexError:
                 print(f'{result_column} column not in {file_name}')
     
