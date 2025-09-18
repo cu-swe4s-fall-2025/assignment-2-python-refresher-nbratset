@@ -19,29 +19,36 @@ def get_column(file_name, query_column, query_value, result_column=1):
     try:
         f = open(file_name, 'r')
     except FileNotFoundError:
-        print('Could not find '+file_name)
+        print(f'Could not find file: {file_name}')
     except PermissionError:
-        print('Could not open '+file_name)
+        print(f'Could not open file: {file_name}')
     
-    column_header = f.readline()                             # reads first line to get column headers
+    column_header = f.readline()                          # reads first line to get column headers
     
     try:
         query_index=int(query_column)
     except ValueError:
-        query_index = column_header.index(query_column)      # finds column index for the query_column string value
+        query_index = column_header.index(query_column)       # finds column index for the query_column string value
     
-    try:                                                     # checks if result_column is a string or int
+    try:                                                      # checks if result_column is a string or int
         result_index=int(result_column)
     except ValueError:
-        result_index = column_header.index(result_column)    # finds column index for the result_column string value
+        try:
+            result_column in column_header
+            result_index = column_header.index(result_column) # finds column index for the result_column string value
+        except ValueError:
+            print(f'{result_column} column not in {file_name}')
                                                                                                         
-    result_array = []                                        # Final result list to be appended to
+    result_array = []                                         # Final result list to be appended to
 
-    for line in f:                                           # iterrates over all lines in csv
-        line_array = line.rstrip().split(',')                # splits line into an array
+    for line in f:                                            # iterrates over all lines in csv
+        line_array = line.rstrip().split(',')                 # splits line into an array
         
-        if line_array[query_index] == query_value:           # checks for query_value in the query_column
-            result_array.append(line_array[result_index])    # appends value if conditions are met to an array
+        if line_array[query_index] == query_value:            # checks for query_value in the query_column
+            try:
+                result_array.append(line_array[result_index]) # appends value if conditions are met to an array
+            except IndexError:
+                print(f'{result_column} column not in {file_name}')
     
     f.close()
 

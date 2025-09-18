@@ -1,9 +1,9 @@
 from my_utils import get_column
 import argparse
 
-parser = argparse.ArgumentParser(
-            description='',
-            prog='')
+parser = argparse.ArgumentParser(description='This script imports my_utils and uses get_column to print a list of integers for the desired country and fire type.',
+                                 prog='print_fires',
+                                 epilog='How to Run:\n>python print_fires.py -f "filename.csv" -c "Country Name" -cc "Country_Column" -fc "Fire Column"')
 
 parser.add_argument('-c',
                     '--country',
@@ -26,18 +26,14 @@ parser.add_argument('-fc',
 parser.add_argument('-f',
                     '--file_name',
                     type=str,
-                    help='Type the full filename and extension. ',
+                    help='Type the full filename and extension.',
                     required=True)
 
 args=parser.parse_args()
 
+fires = get_column(args.file_name,
+                   args.country_column,
+                   args.country,
+                   args.fires_column)
 
-# country='United States of America'
-# county_column = 0
-# # fires_column = 3  # optional integer (index) or string handling for fires_column
-# fires_column = 'Forest fires'
-# file_name = 'Agrofood_co2_emission.csv'
-
-print(args.file_name,args.country_column,args.country,args.fires_column)
-# fires = get_column(args.file_name,args.country_column,args.country,args.fires_column)
-# print(fires)
+print(fires)
