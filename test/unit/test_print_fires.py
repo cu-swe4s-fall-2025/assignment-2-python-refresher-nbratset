@@ -21,10 +21,28 @@ class TestMathLib(unittest.TestCase):
             random_array = random.randrange(0,100,length)
             self.assertEqual(my_utils.mean(random_array, np.mean(random_array)))
 
+    def test_mean_errors(self):
+        with self.assertRaises(SystemExit) as cm:
+            my_utils.mean([])
+        self.assertEqual(cm.exception.code, 1)
+
+        with self.assertRaises(SystemExit) as cm:
+            my_utils.mean('string')
+        self.assertEqual(cm.exception.code, 1)
+
     def test_median(self):
         self.assertEqual(my_utils.median([1, 2, 3, 4]), 2.5)  # even case
         self.assertEqual(my_utils.median([1, 2, 3, 4, 5]), 3) # odd case
         self.assertEqual(my_utils.median([2, 5, 6, 9, 12, 7]), np.median([2, 5, 6, 9, 12, 7])) #out of order list
+
+    def test_median_errors(self):
+        with self.assertRaises(SystemExit) as cm:
+            my_utils.median([])
+        self.assertEqual(cm.exception.code, 1)
+
+        with self.assertRaises(SystemExit) as cm:
+            my_utils.median('string')
+        self.assertEqual(cm.exception.code, 1)
 
     def test_random_median(self):
         for i in range(0,10):
@@ -43,6 +61,15 @@ class TestMathLib(unittest.TestCase):
             length = random.randint(1, 100)
             random_array = random.randrange(0,100,length)
             self.assertEqual(my_utils.stdev(random_array, np.std(random_array)))
+    
+    def test_stdev_errors(self):
+        with self.assertRaises(SystemExit) as cm:
+            my_utils.stdev([])
+        self.assertEqual(cm.exception.code, 1)
+
+        with self.assertRaises(SystemExit) as cm:
+            my_utils.stdev('string')
+        self.assertEqual(cm.exception.code, 1)
 
 
 if __name__ == '__main__':
