@@ -59,33 +59,47 @@ def get_column(file_name, query_column, query_value, result_column=1):
 
 def mean(array):
     ''' Calculates mean via (sum of all values in array) / (number of values in array). '''
-    sum = 0
     try:
         total = len(array)
     except IndexError:
         print('Array provided was empty!')
-        sys.exit(1)
-
+        return None
+    
+    if total == 0:
+        print('Array provided was empty!')
+        return None
+    
+    sum = 0.0
     for value in array:
-        sum += int(value)
+        try:
+            sum += float(value)
+        except (ValueError, TypeError):
+            print('Array contains non-number characters!')
+            return None
     
     return sum / total
 
 def median(array):
     ''' Calculates median for both odd and even number arrays by finding the middle index of the sorted list. 
         For an even array, the funtion finds the middle two indexes and returns the average of the two. '''
+    try: 
+        float_array = [float(x) for x in array]
+    except (ValueError, TypeError):
+            print('Array contains non-number characters!')
+            return None
+    
     try:
-        length = len(array)
+        length = len(float_array)
     except IndexError:
         print('Array provided was empty!')
-        sys.exit(1)
+        return None
 
-    sorted_array = sorted(array)
+    sorted_array = sorted(float_array)
     median_index = length // 2
 
     if length % 2 == 0:
         second_index = median_index - 1
-        return (sorted_array[median_index] + sorted_array[second_index]) / 2
+        return (sorted_array[median_index] + sorted_array[second_index]) / 2.0
     else:
         return sorted_array[median_index]
 
@@ -94,14 +108,29 @@ def stdev(array):
         Sqrt(Summation of (x-mean)^2 / N) where N is the number of elements in the array. '''
     array_mean = mean(array)
     
-    if len(array) == 1:
-        print('Cannot compute stdev of an array with length 1')
+    if array_mean is None:
+        print('Array provided was empty!')
         return None
     
-    sum = 0
-    for value in array:
+    try:
+        length = len(array)
+    except IndexError:
+        print('Array provided was empty!')
+        return None
+    
+    if length <= 1:
+        print('Cannot compute stdev of an array with less than 2 elements.')
+        return 0.0
+    
+    try: 
+        float_array = [float(x) for x in array]
+    except (ValueError, TypeError):
+            print('Array contains non-number characters!')
+            return None
+
+    sum = 0.0
+    for value in float_array:
         delta_x_squared = (value - array_mean) ** 2
         sum += delta_x_squared
     
-    return (sum / len(array)) ** 0.5
-
+    return (sum / length) ** 0.5
