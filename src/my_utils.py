@@ -1,3 +1,5 @@
+import sys 
+
 def get_column(file_name, query_column, query_value, result_column=1):
     '''Reads a CSV file and finds lines with a given value in a given column. Returns value of speficied column as an array.
     
@@ -54,3 +56,42 @@ def get_column(file_name, query_column, query_value, result_column=1):
     f.close()
 
     return result_array
+
+def mean(array):
+    sum = 0
+    try:
+        total = len(array)
+    except IndexError:
+        print('Array provided was empty!')
+        sys.exit(1)
+
+    for value in array:
+        sum += int(value)
+    
+    return sum / total
+
+def median(array):
+    try:
+        length = len(array)
+    except IndexError:
+        print('Array provided was empty!')
+        sys.exit(1)
+
+    sorted_array = sorted(array)
+    median_index = length // 2
+
+    if length % 2 == 0:
+        second_index = median_index - 1
+        return (sorted_array[median_index] + sorted_array[second_index]) / 2
+    else:
+        return sorted_array[median_index]
+
+def stdev(array):
+    array_mean = mean(array)
+    sum = 0
+    for value in array:
+        delta_x_squared = (value - array_mean) ** 2
+        sum += delta_x_squared
+    
+    return (sum / len(array)) ** 0.5
+
