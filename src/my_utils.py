@@ -82,18 +82,24 @@ def mean(array):
 def median(array):
     ''' Calculates median for both odd and even number arrays by finding the middle index of the sorted list. 
         For an even array, the funtion finds the middle two indexes and returns the average of the two. '''
+    try: 
+        float_array = [float(x) for x in array]
+    except (ValueError, TypeError):
+            print('Array contains non-number characters!')
+            return None
+    
     try:
-        length = len(array)
+        length = len(float_array)
     except IndexError:
         print('Array provided was empty!')
-        sys.exit(1)
+        return None
 
-    sorted_array = sorted(array)
+    sorted_array = sorted(float_array)
     median_index = length // 2
 
     if length % 2 == 0:
         second_index = median_index - 1
-        return (sorted_array[median_index] + sorted_array[second_index]) / 2
+        return (sorted_array[median_index] + sorted_array[second_index]) / 2.0
     else:
         return sorted_array[median_index]
 
