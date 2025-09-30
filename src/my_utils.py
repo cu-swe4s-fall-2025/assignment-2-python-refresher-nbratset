@@ -77,13 +77,21 @@ def median(array):
         print('Array provided was empty!')
         sys.exit(1)
 
+    sorted_array = sorted(array)
     median_index = length // 2
 
     if length % 2 == 0:
         second_index = median_index - 1
-        return (array[median_index] + array[second_index]) / 2
+        return (sorted_array[median_index] + sorted_array[second_index]) / 2
     else:
-        return array[median_index]
+        return sorted_array[median_index]
 
-def stdev():
-    pass
+def stdev(array):
+    array_mean = mean(array)
+    sum = 0
+    for value in array:
+        delta_x_squared = (value - array_mean) ** 2
+        sum += delta_x_squared
+    
+    return (sum / len(array)) ** 0.5
+
