@@ -108,13 +108,29 @@ def stdev(array):
         Sqrt(Summation of (x-mean)^2 / N) where N is the number of elements in the array. '''
     array_mean = mean(array)
     
-    if len(array) == 1:
-        print('Cannot compute stdev of an array with length 1')
+    if array_mean is None:
+        print('Array provided was empty!')
         return None
     
-    sum = 0
-    for value in array:
+    try:
+        length = len(array)
+    except IndexError:
+        print('Array provided was empty!')
+        return None
+    
+    if length <= 1:
+        print('Cannot compute stdev of an array with less than 2 elements.')
+        return 0.0
+    
+    try: 
+        float_array = [float(x) for x in array]
+    except (ValueError, TypeError):
+            print('Array contains non-number characters!')
+            return None
+
+    sum = 0.0
+    for value in float_array:
         delta_x_squared = (value - array_mean) ** 2
         sum += delta_x_squared
     
-    return (sum / len(array)) ** 0.5
+    return (sum / length) ** 0.5
