@@ -93,6 +93,11 @@ def stdev(array):
     ''' Calculates the standard deviation of an array via:
         Sqrt(Summation of (x-mean)^2 / N) where N is the number of elements in the array. '''
     array_mean = mean(array)
+    
+    if len(array) == 1:
+        print('Cannot compute stdev of an array with length 1')
+        return None
+    
     sum = 0
     for value in array:
         delta_x_squared = (value - array_mean) ** 2
