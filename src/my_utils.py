@@ -54,3 +54,18 @@ def get_column(file_name, query_column, query_value, result_column=1):
     f.close()
 
     return result_array
+
+def mean(array):
+    sum = 0
+    total = len(array)
+
+    for value in array:
+        sum += int(value)
+    
+    return sum / total
+
+def median(array):
+    pass
+
+def stdev():
+    pass
