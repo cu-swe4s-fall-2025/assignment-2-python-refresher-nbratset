@@ -58,6 +58,7 @@ def get_column(file_name, query_column, query_value, result_column=1):
     return result_array
 
 def mean(array):
+    ''' Calculates mean via (sum of all values in array) / (number of values in array). '''
     sum = 0
     try:
         total = len(array)
@@ -71,6 +72,8 @@ def mean(array):
     return sum / total
 
 def median(array):
+    ''' Calculates median for both odd and even number arrays by finding the middle index of the sorted list. 
+        For an even array, the funtion finds the middle two indexes and returns the average of the two. '''
     try:
         length = len(array)
     except IndexError:
@@ -87,6 +90,8 @@ def median(array):
         return sorted_array[median_index]
 
 def stdev(array):
+    ''' Calculates the standard deviation of an array via:
+        Sqrt(Summation of (x-mean)^2 / N) where N is the number of elements in the array. '''
     array_mean = mean(array)
     sum = 0
     for value in array:
