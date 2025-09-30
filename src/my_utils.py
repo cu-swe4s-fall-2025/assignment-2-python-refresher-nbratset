@@ -59,15 +59,23 @@ def get_column(file_name, query_column, query_value, result_column=1):
 
 def mean(array):
     ''' Calculates mean via (sum of all values in array) / (number of values in array). '''
-    sum = 0
     try:
         total = len(array)
     except IndexError:
         print('Array provided was empty!')
-        sys.exit(1)
-
+        return None
+    
+    if total == 0:
+        print('Array provided was empty!')
+        return None
+    
+    sum = 0.0
     for value in array:
-        sum += int(value)
+        try:
+            sum += float(value)
+        except (ValueError, TypeError):
+            print('Array contains non-number characters!')
+            return None
     
     return sum / total
 
@@ -104,4 +112,3 @@ def stdev(array):
         sum += delta_x_squared
     
     return (sum / len(array)) ** 0.5
-
