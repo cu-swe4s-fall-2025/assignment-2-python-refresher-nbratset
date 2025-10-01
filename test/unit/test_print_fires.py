@@ -46,20 +46,15 @@ class TestMathLib(unittest.TestCase):
         self.assertEqual(my_utils.stdev([10]), 0.0)
         self.assertEqual(my_utils.stdev([10, 1, 20, 13, 5, 12, 11]), np.std([10, 1, 20, 13, 5, 12, 11]))
     
-    # def test_random_stdev(self):
-    #     for i in range(0,10):
-    #         length = random.randint(1, 100)
-    #         random_array = random.randrange(0,100,length)
-    #         self.assertEqual(my_utils.stdev(random_array, np.std(random_array)))
-    
-    # def test_stdev_errors(self):
-    #     with self.assertRaises(SystemExit) as cm:
-    #         my_utils.stdev([])
-    #     self.assertEqual(cm.exception.code, 1)
+    def test_stdev_errors(self):
+        self.assertEqual(my_utils.mean([]), None)
+        self.assertEqual(my_utils.mean(['1', '2', '3']), 2.0)
 
-    #     with self.assertRaises(SystemExit) as cm:
-    #         my_utils.stdev('string')
-    #     self.assertEqual(cm.exception.code, 1)
+    def test_random_stdev(self):
+        for i in range(0,10):
+            length = random.randint(2, 100)
+            random_array = [random.randint(1, 99) for _ in range(length)]
+            self.assertAlmostEqual(my_utils.stdev(random_array), np.std(random_array))
 
 
 if __name__ == '__main__':
