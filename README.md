@@ -7,14 +7,20 @@ This program reads a given csv file, filters by a value (country) in a specific 
 > python print_fires.py -f 'file-name.csv' -c 'value' -cc 'country column' -fc 'fire column'
 
 An actual example:
-> python print_fires.py -f 'Agrofood_co2_emission.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires'
+> python print_fires.py -f 'Agrofood_co2_emission.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'all'
 
-Expected result:
-> ['54454.7092', '54565.6091', '57469.9273', '54689.318', '55539.8937', '55641.1573', '57001.184', '57728.8676', '53453.6536', '50059.8887', '53054.1566', '57860.5746', '55665.2389', '50144.671', '61980.1758', '61416.6008', '65677.2295', '61160.3566', '59283.771', '55048.0868', '56536.7447', '53561.7556', '51037.2406', '55433.3326', '53366.6183', '53322.7363', '51375.615', '50577.6296', '51007.8455', '43785.9965', '40802.7314']
+Expected results:
+> [54454, 54565, 57469, 54689, 55539, 55641, 57001, 57728, 53453, 50059, 53054, 57860, 55665, 50144, 61980, 61416, 65677, 61160, 59283, 55048, 56536, 53561, 51037, 55433, 53366, 53322, 51375, 50577, 51007, 43785, 40802]
+
+> Mean: 54602.77419354839
+
+> Median: 54689.0
+
+> Standard Deviation: 4881.5765017625035
 
 ## Shell Script
 You can use **run.sh** instead of commandline to run this script, following the same format as above:
-> python print_fires.py -f 'file-name.csv' -c 'value' -cc 'country column' -fc 'fire column'
+> python print_fires.py -f 'file-name.csv' -c 'value' -cc 'country column' -fc 'fire column' -o 'mean/median/stdev/all' (optional)
 
 # How to install
 This program uses python3 and imports the argparse library. 
@@ -23,6 +29,23 @@ This program uses python3 and imports the argparse library.
 3. If running your script with bash, also make sure **run.sh** is installed and modified to match your filenames and arguments.
 
 # Changelog
+## 9-30-2025 by Natalie Bratset
+### General
+- added src and test directories
+    - src: where the python scripts and any data files live
+    - test: where functional and unit tests live
+- added functional and unit tests in: test/func and test/unit
+### my_utils.py
+- added mean, median, and standard deviation functions
+    - Input: an array
+    - Output: single value float with mean, median, or stdev of all elements in array.
+
+### print_fires.py
+- added optional commandline argument for operator
+    - Usage: -o or --operator
+    - Options: mean, median, stdev, or all
+
+
 ## 9-18-2025 by Natalie Bratset
 ### my_utils.py
 - added error handling
