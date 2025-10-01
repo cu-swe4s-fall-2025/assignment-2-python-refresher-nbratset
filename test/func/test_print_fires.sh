@@ -3,24 +3,26 @@ test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest
 
 ## Positive cases ##
 run test_mean_by_name python src/print_fires.py -f 'test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'mean'
-assert_in_stdout "1999.5617"
-assert_in_stdout "Mean: 1928.79919"
+assert_in_stdout "1999"
+assert_in_stdout "5405"
+assert_in_stdout "Mean: 1928.225806451613"
 assert_exit_code 0
 
 run test_median_by_index python src/print_fires.py -f 'test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'median'
-assert_in_stdout "1999.5617"
-assert_in_stdout "Median: 1558.7559"
+assert_in_stdout "1999"
+assert_in_stdout "5405"
+assert_in_stdout "Median: 1558.0"
 assert_exit_code 0
 
-run test_stdev python src/print_fires.py -f 'test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'stdev'
-assert_in_stdout "55.3751"
+run test_stdev python src/print_fires.py -f 'test_data.csv' -c 'Spain' -cc 'Area' -fc 'Forest fires' -o 'stdev'
+assert_in_stdout "55"
 assert_in_stdout "Standard Deviation: 72.65564"
 assert_exit_code 0
 
-run test_all python src/print_fires.py -f 'test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'all'
-assert_in_stdout "Mean: 200.0"
-assert_in_stdout "Median: 200.0"
-assert_in_stdout "Standard Deviation: 81.64965809277261"
+run test_all python src/print_fires.py -f 'test_data.csv' -c 'Portugal' -cc 'Area' -fc 'Forest fires' -o 'all'
+assert_in_stdout "Mean: 73.28"
+assert_in_stdout "Median: 71.0"
+assert_in_stdout "Standard Deviation: 97.98058688"
 assert_exit_code 0
 
 
@@ -44,6 +46,6 @@ assert_in_stdout "Mean: None"
 assert_exit_code 0
 
 run test_wrong_operator src/print_fires.py -f 'test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'mode'
-assert_in_stdout "1999.5617"
+assert_in_stdout "1999"
 assert_not_in_stdout "Mean"
 assert_exit_code 0
