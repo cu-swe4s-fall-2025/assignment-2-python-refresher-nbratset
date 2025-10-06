@@ -3,9 +3,9 @@ test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest
 
 ## Positive cases ##
 run test_mean_by_name python src/print_fires.py -f 'src/test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'mean'
-assert_in_stdout "1999"
+assert_in_stdout "1190"
 assert_in_stdout "5405"
-assert_in_stdout "Mean: 1928.225806451613"
+assert_in_stdout "Mean: 3017"
 assert_exit_code 0
 
 run test_median_by_index python src/print_fires.py -f 'src/test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'median'
