@@ -31,15 +31,15 @@ assert_exit_code 0
 
 ## Error Cases ##
 run test_file_not_found python src/print_fires.py -f 'src/file.csv' -c 'Any' -cc 'Any' -fc 'Any'
-assert_in_stderr "Could not open file"
+assert_in_stdout "Could not find file"
 assert_exit_code 0
 
 run test_bad_query_column python src/print_fires.py -f 'src/test_data.csv' -c 'USA' -cc 'Any' -fc 'Any'
-assert_in_stderr "column not in src/test_data.csv"
+assert_in_stdout "column not in src/test_data.csv"
 assert_exit_code 0
 
 run test_bad_result_column python src/print_fires.py -f 'src/test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Bad_Fires'
-assert_in_stderr "column not in src/test_data.csv"
+assert_in_stdout "column not in src/test_data.csv"
 assert_exit_code 0
 
 run test_empty_array python src/print_fires.py -f 'src/test_data.csv' -c 'Not a Country' -cc 'Area' -fc 'Forest fires' -o 'mean'
