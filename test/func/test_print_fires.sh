@@ -45,7 +45,7 @@ assert_in_stdout "Array provided was empty!"
 assert_in_stdout "Mean: None"
 assert_exit_code 0
 
-run test_wrong_operator src/print_fires.py -f 'src/test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'mode'
+run test_wrong_operator python src/print_fires.py -f 'src/test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'mode'
 assert_in_stdout "1999"
 assert_not_in_stdout "Mean"
 assert_exit_code 0
