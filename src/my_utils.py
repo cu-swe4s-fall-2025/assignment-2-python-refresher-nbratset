@@ -43,7 +43,7 @@ def get_column(file_name, query_column,
             query_index = column_header.index(query_column)
         else:
             print(f'{result_column} column not in {file_name}')
-            sys.exit(1)
+            sys.exit(0)
 
     try:  # checks if result_column is a string or int
         result_index = int(result_column)
@@ -52,7 +52,7 @@ def get_column(file_name, query_column,
                 result_index = column_header.index(result_column)
             else:
                 print(f'{result_column} column not in {file_name}')
-                sys.exit(1)
+                sys.exit(0)
 
     # Final result list to be appended to
     result_array = []

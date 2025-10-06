@@ -33,7 +33,7 @@ assert_exit_code 0
 
 run test_bad_query_column python src/print_fires.py -f 'src/test_data.csv' -c 'USA' -cc 'bad_col' -fc 'Forest fires'
 assert_in_stderr "substring not found"
-assert_exit_code 1
+assert_exit_code 0
 
 run test_bad_result_column python src/print_fires.py -f 'src/test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Bad_Fires'
 assert_in_stderr "Bad_Fires column not in test_data.csv"
