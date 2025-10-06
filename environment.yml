@@ -3,4 +3,5 @@ channels:
   - bioconda
   - conda-forge
 dependencies:
+  - numpy
   - pycodestyle>=2.14
