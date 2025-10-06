@@ -2,7 +2,7 @@ import sys
 
 
 def get_column(file_name, query_column,
-               query_value, result_column=1):
+               query_value, result_column):
     '''Reads a CSV file and finds lines with a given value in a given column.
     Returns value of speficied column as an array.
 
@@ -24,29 +24,35 @@ def get_column(file_name, query_column,
     '''
     try:
         with open(file_name, 'r') as f:
-            column_header = f.readline()
+            column_header = f.readline().strip().split(',')
     except FileNotFoundError:
-        print(f'Could not find file: {file_name}')
+        print(f'File Does not Exist\nCould not find file: {file_name}')
         sys.exit(0)
     except PermissionError:
-        print(f'Could not open file: {file_name}')
+        print(f'Permissions Issue\nCould not open file: {file_name}')
+        sys.exit(0)
+    else:
+        print(f'Unknown Error\nCould not open file: {file_name}')
         sys.exit(0)
 
     try:
         query_index = int(query_column)
     except ValueError:
         # finds column index for the query_column string value
-        query_index = column_header.index(query_column)
+        if query_column in column_header:
+            query_index = column_header.index(query_column)
+        else:
+            print(f'{result_column} column not in {file_name}')
+            sys.exit(1)
 
     try:  # checks if result_column is a string or int
         result_index = int(result_column)
     except ValueError:
-        try:
-            result_column in column_header
-            # finds column index for the result_column string value
-            result_index = column_header.index(result_column)
-        except ValueError:
-            print(f'{result_column} column not in {file_name}')
+            if result_column in column_header:
+                result_index = column_header.index(result_column)
+            else:
+                print(f'{result_column} column not in {file_name}')
+                sys.exit(1)
 
     # Final result list to be appended to
     result_array = []
@@ -58,13 +64,11 @@ def get_column(file_name, query_column,
         # checks for query_value in the query_column
         if line_array[query_index] == query_value:
             try:
-                # Saves value as a float
                 value = float(line_array[result_index])
-                # appends value as an integer to an array
-                # (since the instructions wanted integers)
                 result_array.append(int(value))
             except IndexError:
                 print(f'{result_column} column not in {file_name}')
+                sys.exit(0)
 
     f.close()
 
