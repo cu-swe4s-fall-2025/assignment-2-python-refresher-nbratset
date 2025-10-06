@@ -1,5 +1,8 @@
 test -e ssshtest || wget -q https://raw.githubusercontent.com/ryanlayer/ssshtest/master/ssshtest
 . ssshtest
+echo "---------------------------------------------"
+pwd
+echo "---------------------------------------------"
 
 ## Positive cases ##
 run test_mean_by_name python src/print_fires.py -f 'src/test_data.csv' -c 'United States of America' -cc 'Area' -fc 'Forest fires' -o 'mean'
