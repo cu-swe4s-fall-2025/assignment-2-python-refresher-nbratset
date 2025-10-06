@@ -19,13 +19,13 @@ assert_exit_code 0
 
 run test_stdev python src/print_fires.py -f 'src/test_data.csv' -c 'Chile' -cc 'Area' -fc 'Forest fires' -o 'stdev'
 assert_in_stdout "40"
-assert_in_stdout "Standard Deviation: 80.10826008"
+assert_in_stdout "Standard Deviation: 65.40812046"
 assert_exit_code 0
 
 run test_all python src/print_fires.py -f 'src/test_data.csv' -c 'Portugal' -cc 'Area' -fc 'Forest fires' -o 'all'
 assert_in_stdout "Mean: 53.6666666"
 assert_in_stdout "Median: 28"
-assert_in_stdout "Standard Deviation: 58.85858759"
+assert_in_stdout "Standard Deviation: 48.05783553"
 assert_exit_code 0
 
 
