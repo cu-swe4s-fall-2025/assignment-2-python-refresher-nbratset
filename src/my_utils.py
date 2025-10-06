@@ -23,13 +23,16 @@ def get_column(file_name, query_column,
                     where query_column contains the query_value
     '''
     try:
-        f = open(file_name, 'r')
+        with open(file_name, 'r') as f:
+            column_header = f.readline()  # reads first line to get column headers
     except FileNotFoundError:
         print(f'Could not find file: {file_name}')
+        sys.exit(0)
     except PermissionError:
         print(f'Could not open file: {file_name}')
+        sys.exit(0)
 
-    column_header = f.readline()  # reads first line to get column headers
+    
 
     try:
         query_index = int(query_column)
