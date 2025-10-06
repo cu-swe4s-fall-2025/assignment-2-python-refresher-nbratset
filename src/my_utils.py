@@ -23,17 +23,15 @@ def get_column(file_name, query_column,
                     where query_column contains the query_value
     '''
     try:
-        with open(file_name, 'r') as f:
-            column_header = f.readline().strip().split(',')
+        f = open(file_name, 'r')
+        column_header = f.readline().strip().split(',')
     except FileNotFoundError:
         print(f'File Does not Exist\nCould not find file: {file_name}')
         sys.exit(0)
     except PermissionError:
         print(f'Permissions Issue\nCould not open file: {file_name}')
         sys.exit(0)
-    else:
-        print(f'Unknown Error\nCould not open file: {file_name}')
-        sys.exit(0)
+   
 
     try:
         query_index = int(query_column)
