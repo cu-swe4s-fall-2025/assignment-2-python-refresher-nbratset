@@ -1,4 +1,4 @@
-name: math_lib
+name: swe4s
 channels:
   - bioconda
   - conda-forge
