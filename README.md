@@ -25,10 +25,19 @@ You can use **run.sh** instead of commandline to run this script, following the 
 # How to install
 This program uses python3 and imports the argparse library. 
 1. Install python3 either [directly](https://www.python.org/downloads/) or with [anaconda](https://www.anaconda.com/download) (recommended).
-2. Make sure to have both **my_utils.py**, **print_fires.py**, and **your_file.csv** in your directory. 
-3. If running your script with bash, also make sure **run.sh** is installed and modified to match your filenames and arguments.
+2. Install numpy and pycodestyle packages for python:
+    > pip install numpy/pycodestyle
+    - See environments.yml for version info if your installations don't work correctly.
+3. Make sure to have both **my_utils.py**, **print_fires.py**, and **your_file.csv** in your directory. 
+4. If running your script with bash, also make sure **run.sh** is installed and modified to match your filenames and arguments.
 
 # Changelog
+## 10-06-2025 by Natalie Bratset
+### General
+ - Implamented automated testing (see .github/workflows/ci_tests.yml)
+ - Added environment.yml to handle numpy and pycodestyle packages
+ - General tweaks to my_utils.py to correctly handle errors; no major function changes.
+
 ## 9-30-2025 by Natalie Bratset
 ### General
 - added src and test directories
