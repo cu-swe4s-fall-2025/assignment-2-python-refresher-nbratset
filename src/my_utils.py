@@ -31,9 +31,6 @@ def get_column(file_name, query_column,
     except PermissionError:
         print(f'Permissions Issue\nCould not open file: {file_name}')
         sys.exit(0)
-    else:
-        print(f'Could not open file: {file_name}')
-        sys.exit(0)
 
     try:
         query_index = int(query_column)
