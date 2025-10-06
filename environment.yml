@@ -1,6 +1,7 @@
-name: math_lib
+name: swe4s
 channels:
   - bioconda
   - conda-forge
 dependencies:
+  - numpy>=1.26.4
   - pycodestyle>=2.14

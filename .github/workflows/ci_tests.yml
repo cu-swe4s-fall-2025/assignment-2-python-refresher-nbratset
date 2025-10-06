@@ -9,13 +9,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python test/unit/test_print_fires.py
+      - name: Setup Micromamba Environment
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          init-shell: bash
+      - name: Run Unit Tests
+        run: python test/unit/test_print_fires.py
+        shell: bash -l {0}
   run_func_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Setup Micromamba Environment
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          init-shell: bash
+      - name: Grant read permission to test data
+        run: chmod +r src/test_data.csv
+      - name: Grant execute permission for print_fires.py
+        run: chmod +x src/print_fires.py
       - run: bash test/func/test_print_fires.sh
-  run_linter:
+        shell: bash -l {0}
+  run_pycodestyle:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
